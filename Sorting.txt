@@ -1,0 +1,797 @@
+A sorting algorithm is said to be stable if two objects with equal keys appear in the same order in sorted output as they appear in the input array to be sorted.
+
+============================================================================
+Selection Sort in O(N^2)
+
+1. Sorts an array by repeatedly finding the smallest element in a sub-array of size n- 1
+2. Swap the smallest element and the first element of the array
+3. Reduce the size by 1
+
+			arr[] = 64 25 12 22 11
+
+			// Find the smallest element in arr and place it at beginning of arr e.g 11
+			//swap 64 and 11
+			11 25 12 22 64
+
+			// Find the smallest element in arr and place it at beginning of arr e.g 12
+			//swap 12 and 25
+			11 12 25 22 64
+
+			// Find the smallest element in arr and place it at beginning of arr e.g 22
+			//swap 22 and 25
+			11 12 22 25 64
+
+			// Find the smallest element in arr and place it at beginning of arr e.g 25
+			11 12 22 25 64
+
+		+++++++++++++++++++++++++++++++++++++++++
+			function selectionSort(arr)
+			{
+			/**
+			* First loop through the array from the first element to arr.length-2 element
+			* Because the smallest elemtnt will be the element in a sub-array with only one element
+			* [x1, x2, x3, x4], x5
+			* Second loop through the sub-array from first element to the arr.length-1 element
+			* x1, [x2, x3, x4, x5]
+			*/
+			for(let i = 0; i < arr.length-1; i++)
+			{
+				let smallestIndex = i; //index of smallest number
+
+				for(let j = i + 1; j < arr.length; j++)
+				{
+
+					if(arr[j] < arr[smallestIndex])
+					{
+						smallestIndex = j;
+					}
+				}
+
+				//swap the minimum element and the first element in sub-array
+				let temp = arr[i];
+				arr[i] = arr[smallestIndex];
+				arr[smallestIndex] = temp;
+			}
+
+				return arr;
+			}
+
+			let myArr = [1,4,2,8,345,123,43,32,5643,63,123,43,2,55,1,234,92,-11];
+
+			console.log(selectionSort(myArr));
+============================================================================
+Insertion Sort in O(N^2)
+
+1. Divide the array into 4 partials:
+   sorted x<=, x , >x unsorted elements
+2. Loop through the array from the 2nd element to the last element
+3. Loop backward in the sub-array from the i -1 element to the first element
+4. Shift the element 1 position ahead if the i - 1 element is less than or equal to x
+
+			arr[] = 64 25 12 22 11
+
+			//i=1
+			// Pick up arr[i] = 25
+			64 > 25 move 64 one postition ahead
+			25 64 12 22 11
+
+			//i=2
+			// Pick up arr[i] = 12
+			64 > 12 move 64 one postition ahead
+			25 > 12 move 64 one postition ahead
+			12 25 64 22 11
+
+			//i=3
+			// Pick up arr[i] = 22
+			64 > 22 move 64 one postition ahead
+			25 > 22 move 64 one postition ahead
+			12 22 25 64 11
+
+			//i=4
+			// Pick up arr[i] = 11
+			64 > 11 move 64 one postition ahead
+			25 > 11 move 64 one postition ahead
+			22 > 11 move 64 one postition ahead
+			12 > 11 move 64 one postition ahead
+			11 12 22 25 64
+		+++++++++++++++++++++++++++++++++++++++++++
+			/**
+			* First loop through the array from the 2nd element to the last element
+			* x1,[x2, x3, x4, x5]
+			* Second loop backward in a sub-array from the i-1 to the first element
+			* [x1], x2, x3, x4, x5
+			*/
+			function insertionSort(array)
+			{
+				//loop backward until the i-1 !> current element
+				//compare the arr[j] > current inside the for statement because the sorting stops if the arr[j] < current
+				//keep track on the index j
+				for(let i = 1; i < array.length; i++){
+					let curr = array[i];
+					let j = i - 1;
+
+					//moves the element 1 position ahead if the element > the current element
+					for(j; j >= 0 && array[j] > curr; j--)
+						array[j+1] = array[j];
+					
+					//inserts the current element into appropriiate position
+					array[j+1] = curr;
+				}
+
+				return array;
+			}
+
+			let myArr = [1,4,2,8,345,123,43,32,5643,63,123,43,2,55,1,234,92,-11];
+
+			console.log(insertionSort(myArr));
+
+============================================================================
+Bubble Sort is a sorting algorithm that works by repeatedly swapping the adjacent elements if they are in wrong order.
+
+Best Case: O(N) if the array is sorted.
+
+Average and Worst: O(N^2) if the array is in reverse order.
+
+Is Stable.
+
+				First Loop
+				arr[] = 64 25 12 22 11		swap 64,25
+
+				arr[] = 25 64 12 22 11		swap 64,12
+
+				arr[] = 25 12 64 22 11		swap 64,22
+
+				arr[] = 25 12 22 64 11		swap 64,11
+
+				arr[] = 25 12 22 11 64		swap 64,11
+
+				Second Loop
+				arr[] = 25 12 22 11 64		swap 25,12
+
+				arr[] = 12 25 22 11 64		swap 25,22
+
+				arr[] = 12 22 25 11 64		swap 25,11
+
+				arr[] = 12 22 11 25 64		swap 25,11
+
+				Thrid Loop
+				arr[] = 12 22 11 25 64		swap 22,11
+
+				arr[] = 12 11 22 25 64		swap 22,11
+
+				Forth Loop
+				arr[] = 12 11 22 25 64		swap 12,11
+
+				arr[] = 11 12 22 25 64
+
+		+++++++++++++++++++++++++++++++++++++++++++
+				function OptimizedBubbleSort(array)
+				{
+					for(let i = 0; i < array.length; i++){
+						let isSwap = false;
+
+						//-1 because the sorting takes maximum of arr.length-1 times of swapping elements
+						//-i because the largest element is the last element
+						for(let j = 0; j < array.length - 1 - i; j++){
+							if(array[j] > array[j+1]){
+								swap(array, j, j+1);
+								isSwap = true;
+							}								
+						}
+
+						//if there is no swapping of elements, terminate the loop
+						if(!isSwap){
+							break;
+						}
+					}
+
+					return array;
+				}
+
+				function swap(array, i, j){
+					[array[i], array[j]] = [array[j], array[i]];
+				}
+
+				let myArr = [1,4,2,8,345,123,43,32,5643,63,123,43,2,55,1,234,92,-11];
+
+				console.log(OptimizedBubbleSort(myArr));
+
+============================================================================
+Merge Sort is a Divide and Conquer algorithm for Linked List.
+
+It is more efficient and works faster in larger size of list.
+
+Time Complexity: O(NlogN).
+
+Stable.
+
+ 1) Find the middle element and divid the array into halves
+ 2) Recursively split the first half into 2 halves until the sub-array with only 1 element
+ 3) Recursively divide the second half into 2 halves until the sub=array with only 1 element
+ 4) Recursively Merge each sorted 2 halves together
+
+						   arr[] = 64 25 12 | 22 11
+							/					  \
+						64,25,12				22,11
+						/      \  				/    \
+					64,25      12			   22    11
+					/	\                      \      /
+				  64    25                       11,22
+				   \     /
+                    25,64
+                       \     /
+                      12,25,64
+                         \                        /
+                               11,12,22,25,64
+		++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+			function mergeSort(arr)
+			{
+				if(arr.length == 1) //base case
+				{
+					return arr;
+				}
+
+				let middle = Math.floor(arr.length/2);
+				let leftHavle = mergeSort(arr.slice(0, middle));
+				let rightHavle = mergeSort(arr.slice(middle));
+
+				return merge(leftHavle, rightHavle);
+			}
+
+			function merge(arr1, arr2)
+			{
+				let i = 0,
+				j = 0; //let i and j become the index of arr1 and arr2 respectively
+				let mergeArr = [];
+
+				while(i < arr1.length && j < arr2.length)
+				{
+					if(arr1[i] < arr2[j])
+					{
+						mergeArr.push(arr1[i++]);
+					}
+					else
+					{
+						mergeArr.push(arr2[j++]);
+					}
+				}
+
+				//add any remain element in arr1 into merge-array
+				while(i < arr1.length)
+				{
+					mergeArr.push(arr1[i++]);
+				}
+
+				//add any remain element in arr2 into merge-array
+				while(j < arr2.length)
+				{
+					mergeArr.push(arr2[j++]);
+				}
+
+				return mergeArr;
+			}
+
+			let myArr = [1,4,2,8,345,123,43,32,5643,63,123,43,2,55,1,234,92,-11];
+
+			console.log(mergeSort(myArr));
+
+============================================================================
+QuickSort is a Divide and Conquer algorithm for Array
+
+It is more efficient and works faster in smaller size of list
+
+Not Stable.
+
+It picks an element as pivot and partitions the given array around the picked pivot
+
+Left side of pivot contains all the elements that are less than the pivot element
+Right side contains all elements greater than the pivot
+
+							L <= pivot <= R
+
+1) Always pick first element as pivot.
+   What happen if the array in ascending order, the 1st element is the smallest, all elements go to Right side
+
+2) Always pick last element as pivot.
+   What happen if the array in ascending order, the last element is the largest, all elements go to Left side
+
+3) Pick a random element as pivot but the random number generation can be expensive, and may pick a smallest and largest
+
+4) Pick median as pivot, guarantees that the two partitions are as close to equal size as possible. But hard to find
+
+Worst Case in O(N^2): The worst case occurs when the partition process always picks greatest or smallest element as pivot
+
+Best Case in O(NlogN): The best case occurs when the partition process always picks the middle element as pivot
+
+On Average in O(NlogN).
+
+Median of three partitioning
+1) Pick up 3 elements leftmost, rightmost and center = (left+ right)/2.
+2) Swap these element if
+   center < left swap it
+   right < left swap it
+   right < center swap it
+
+   So left = Smallest, right = Largest, center = median of three
+3) Pick center as pivot.
+
+				arr[] = 64 25 12 22 11
+
+				left=64, center=12, right=11
+
+				center < left, swap it
+
+				left=12, center=64, right=11
+
+				right < left, swap it
+
+				left=11, center=64, right=12
+
+				right < center, swap it
+
+				left=11, center=12, right=64
+
+			    arr[] = 11 25 12 22 64
+
+				Pick 12 as pivot
+
+
+1) Let i = left + 1, j = right – 1
+2) Swap pivot and arr[j]
+3) While i < j
+
+   Move i right If arr[i] < pivot, else stop
+   Move j left If arr[j] >= pivot, else stop
+
+   When both i and j stop, swap arr[i] and arr[j]
+
+4) When i >= j && i < pivot index, swap arr[i] and pivot
+5) QuickSort(Left) and QuickSort(right).
+
+					arr[] = 11 25 12 22 64
+
+					12 as pivot
+
+					Swap pivot and arr[right-1])
+
+					Index of pivot = 3
+
+					11 25 22 12 64
+				       i      j
+
+				       25 !< 12 i stop
+					   12 >= 12 j
+
+				    11 25 22 12 64
+				        i  j
+
+					    22 >= 12 j
+
+				    11 25 22 12 64
+				       ij
+
+					    25 >= 12 j
+
+				    11 25 22 12 64
+				    j   i
+					    11 !>= 12 j stop
+
+					i !<= j
+
+					i >=j && i < pivot index = 3
+
+					swap arr[i] and pivot
+
+					11 12 22 25 64
+
+					pivot index  = 1
+
+					Do QuickSort(arr, 0, 0) and QuickSort(arr, 1, arr.lenth-1)
+			+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+				function swap(array, a, b)
+				{
+					//using destructured assignment to swap the elements
+					[array[a], array[b]] = [array[b], array[a]];
+				}
+
+
+				/**
+				* Pick up 3 elements, leftmost, middle, rightmost
+				* Swap leftmost, middle, rightmost
+				* So left = Smallest, center = median of three, right = Largest,
+				*/
+				function findPivotIndex(array, left, right)
+				{
+					let pivot = Math.floor((right+left)/2);
+
+					//swap leftmost, middle, rightmost
+						if(array[right] < array[left])
+						{
+							swap(array, right, left);
+						}
+
+						if(array[pivot] < array[left])
+						{
+							swap(array, pivot, left);
+						}
+
+						if(array[right] < array[pivot])
+						{
+							swap(array, right, pivot);
+
+
+					return pivot;
+				}
+
+				/**
+				* let i and j be the cursors of left + 1 and right - 1 repectively
+				* [left, i,...., pivot, .....,j, right]
+				* Swap pivot and j
+				* [left, ele(i),.........,pivot(j), right]
+				* Move i to the right If arr[i] < pivot, else stop
+				* Move j to the left If arr[j] > pivot, else stop
+				* When both i and j stop, swap arr[i] and arr[j]
+				* When i >= j && i < pivot Index, swap arr[i] and pivot.
+				*/
+				function partition(array, left, right)
+				{
+					let pivotIndex = findPivotIndex(array, left, right);
+					let pivot = array[pivotIndex];
+
+					let i = left + 1,
+						j = right - 1;
+
+					swap(array, pivotIndex, j);
+
+					pivotIndex = j;
+
+					while(i <= j)
+					{
+						//Move i to the right If arr[i] < pivot, else stop
+						while(array[i] < pivot)
+						{
+							i++;
+						}
+
+						//Move j to the left If arr[j] > pivot, else stop
+						while(array[j] >= pivot)
+						{
+							j--;
+						}
+
+						//When both i and j stop, swap arr[i] and arr[j]
+						if(i <= j)
+						{
+							swap(array, i++, j--);
+						}
+					}
+
+					if(i >= j && i < pivotIndex)
+					{
+						swap(array, pivotIndex, i);
+					}
+
+					return i;
+				}
+
+				function quickSort(array, left, right)
+				{
+					if(left >= right)
+					{
+						return array;
+					}
+
+					//find the pivot index
+					let pivot = partition(array, left, right);
+
+					//quickSort [leftmost,....., pivot]
+					if(left < pivot - 1)
+					{
+						quickSort(array, left, pivot - 1);
+					}
+
+					//quickSort [pivot + 1, ....., rightmost]
+					if(right >  pivot)
+					{
+						quickSort(array, pivot + 1, right);
+					}
+
+					return array;
+
+				}
+
+				let myArr = [1,4,2,8,345,123,43,32,5643,63,123,43,2,55,1,234,92];
+
+				console.log(quickSort(myArr, 0 , myArr.length-1));
+			+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+				function quickSort2(arr)
+				{
+					let list = [...arr],
+					smaller = [],
+					larger = [],
+					equal = [];
+
+					if(list.length < 2)
+					{
+						return list;
+					}
+
+					let pivot = list[Math.floor(arr.length/2)];
+
+					/**
+					* Or
+					* smaller = list.filter(ele => ele < pivot);
+					* larger = list.filter(ele => ele > pivot);
+					* equal = list.filter(ele => ele == pivot);
+					*/
+					list.forEach(element =>
+						{
+							if(element > pivot)
+							{
+								larger.push(element);
+							}
+							else if(element < pivot)
+							{
+								smaller.push(element);
+							}
+							else
+							{
+								equal.push(element);
+							}
+						})
+
+					return [...quickSort2(smaller), ...equal, ...quickSort2(larger)];
+				}
+
+
+				let myArr = [1,4,2,8,345,123,43,32,5643,5643, 63,123,43,2,55,1,234,92];
+
+				console.log(quickSort2(myArr));
+
+============================================================================
+Heap sort is a comparsion based sorting based on Binary Heap.
+
+Not Stable.
+
+Time Complexity: O(NlogN)
+
+Best: O(N) Do the sorting only one time.
+
+We find the maximum element and place the maximum element at the end. We repeat the same process for remaining element.
+
+1) Build a Max Heap.
+2) At this point, the largest item is stored at the root of the heap. Replace it with the last item and reduce the size of heap by 1.
+3) Repeat step 1 and step 2 while size > 1.
+
+
+					arr[] = 64 25 12 22 11
+
+							64      Max Heap
+						   /   \
+					      25   12
+					     /  \
+					    22  11
+
+
+							11      Replace 64 with 11 and reduce the size by 1.
+						   /   \
+					      25   12	arr[] = 11 25 12 22 64
+					     /  \
+					    22  64
+
+
+							11        		    25       Max Heap
+						   /   \    		  /    \
+					      25   12  			22     12
+					     /                  /
+					    22                 11
+
+						     11      Replace 25 with 11 and reduce the size by 1.
+						   /   \
+					      22   12	  arr[] = 11 22 12 25 64
+					     /
+					    25
+
+							11        		    22       Max Heap
+						   /   \    		  /    \
+					      22   12  			11     12
+
+						     12      Replace 22 with 12 and reduce the size by 1.
+						   /   \
+					      11   22	  arr[] = 12 11 22 25 64
+
+ 							12        Max Heap
+						   /
+					      11
+
+						     12      Replace 12 with 11 and reduce the size by 1.
+						   /
+					      11   	     arr[] = 11 12 22 25 64
+
+============================================================================
+Counting Sort uses keys as index in counting sort.
+
+Time Complexity: O(N+K), N is number of elements and K is the range.
+
+Is Stable
+
+1) Create a array of count of size = rang k to store the number of appearance of each number.
+2) Modify the count by adding the previous sum of count.
+3) Start from the last element.
+4) The count indicate the position, reduce the count by 1.
+
+					arr[] =   1 6 2 4 5 4
+
+					index     0 1 2 3 4 5 6
+					count[] = 0 1 1 0 2 1 1
+
+					count[] = 0 1 2 0 4 5 6
+
+					4 in position 4
+					5 in position 5
+					4 in position 3
+					2 in position 2
+					6 in position 6
+					1 in position 1
+
+					index     0 1 2 3 4 5 6
+					count[] = 0 0 1 0 2 4 5
+
+					arr[] =   1 2 4 4 5 6
+
+
+To handle negative number,  find the minimum element and we will store count of that minimum element at zero index.
+
+============================================================================
+Radix Sort
+
+Worst and Average: O(d(n+b)), d = number of digits in each number, n = number of elements and b = the base for representing number.
+
+Is Stable
+
+We sort form last significant digit to the most significant digit using any
+stable sort (Counting Sort).
+
+					170, 45, 75, 90, 802, 24, 2, 66
+
+					After sorting 1s place
+					170,090,802,002,024,045,075,066
+
+					After sorting 10s place
+					802,2,24,45,66,170,75,90
+
+					After sorting 100s place
+					2,24,45,66,75,170,802
+
+============================================================================
+Bucket Sort is useful when input are floating point and are uniformly distributed over a range.
+
+For example form 0.0 to 0.1
+
+Is Stable
+
+Worst: O(N^2)
+
+Average: O(N + N^2/k + k) Where k = size of bukets
+
+1) Create n empty array of list.
+2) For every element arr[i].
+3) Insert arr[i] into bucket[n*arr[i]]
+4) Sort individual buckets using insertion sort.
+5) Concatenate all sort lists.
+
+					arr[] = 0.78, 0.17, 0.39, 0.26, 0.72, 0.94
+
+					0
+					1 -> 0.17 -> 0.26
+					2 -> 0.39
+					3
+					4 -> 0.78 -> 0.72
+					5 -> 0.94
+
+					0
+					1 -> 0.17 -> 0.26
+					2 -> 0.39
+					3
+					4 -> 0.72 -> 0.79
+					5 -> 0.94
+
+					0.17,0.26,0.39,0.72,0.79,0.94
+============================================================================
+Shell Sort
+
+Best and Average: O(NlogN)
+Worst: O(N^2)
+
+Is Stable
+
+We compare element that are a distance apart rather than adjacent.
+Calculate gap for each pass n/2, n/4...
+Do a gapped insertion sort for each gap
+Reduce the gap by dividing it by 2.
+
+1) For gap = n/2; gap>0; gap/2
+2) For i=gap;i<n;i++
+3) temp = arr[i]
+4) int j
+5) For j=i;j>=gap && arr[j-gap] > temp; j-=gap
+   arr[j] = arr[j-gap]
+6) arr[j] = temp
+
+							arr[] = 64 25 12 22 11
+
+							First gap = 5/2 = 3
+
+							i = 3
+							arr[3] = 22
+
+							j = 3
+							arr[j-gap] = arr[3-3] = 64 > 22 swap
+
+							arr[] = 22 25 12 64 11
+
+							j = 0 not >= 3
+
+							i = 4
+							arr[4] = 11
+
+							j=4
+							arr[j-gap] = arr[4-3] = 25 > 11 swap
+
+							arr[] = 22 11 12 64 25
+
+							j = 1 not >= 3
+
+							First gap = 3/2 = 1
+
+							i = 1
+
+							arr[1] = 11
+
+							j=1
+
+							arr[j-gap] = arr[1-1] = 22 > 11 swap
+
+							arr[] = 11 22 12 64 25
+
+							i=2
+
+							temp = arr[2] = 12
+
+							j=2
+
+							arr[j-gap] = arr[2-1] = 22 > 12 swap
+
+							arr[] = 11 12 22 64 25
+
+							j=1
+
+							arr[j-gap] = arr[1-1] = 11 > 12 not swap
+
+							arr[] = 11 12 22 64 25
+
+							i = 3
+
+							temp = arr[3] = 64
+
+							j = 3
+
+							arr[j-gap] = arr[3-1] = 22 > 64 not swap
+
+							j = 2
+
+							arr[j-gap] = arr[2-1] = 12 > 64 not swap
+
+							j = 1
+
+							arr[j-gap] = arr[1-1] = 11 > 64 not swap
+
+							i = 4
+
+							temp = arr[4] = 25
+
+							j = 4
+
+							arr[j-gap] = arr[4-1] = 64 > 25 swap
+
+							arr[] = 11 12 22 25 64
