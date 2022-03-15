@@ -47,8 +47,26 @@ class Sorting{
 
         return array;
     }
+
+    static bubbleSort(array){
+        for (let i = 0; i < array.length - 1; i++) {
+            let isSwap = false;
+
+            for (let j = 0; j < array.length - i - 1; j++) {
+                if(array[j] > array[j + 1]){
+                    Sorting.swap(array, j , j + 1);
+                    isSwap = true;
+                }
+            }
+
+            if(!isSwap)
+                break;
+        }
+
+        return array
+    }
 }
 
 let x = Sorting.randomArray(15)
 
-console.log(x, Sorting.insertionSort([...x]))
+console.log(x, Sorting.bubbleSort([...x]))
