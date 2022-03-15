@@ -88,9 +88,41 @@ class Sorting{
             array[i] = output[i]
 
         return array
-    } 
+    }
+    
+    static mergeSort(array){
+        if(array.length < 2)
+            return array;
+        
+        let middle = Math.floor(array.length / 2), 
+            left = Sorting.mergeSort(array.slice(0, middle)),
+            right = Sorting.mergeSort(array.slice(middle));
+
+        return Sorting.#merge(left, right);
+    }
+
+    static #merge(arrA, arrB){
+        let i = 0,
+            j = 0,
+            array = [];
+
+        while (i < arrA.length && j < arrB.length){
+            if (arrA[i] < arrB[j])
+                array.push(arrA[i++]);
+            else
+                array.push(arrB[j++]);
+        }
+
+        while (i < arrA.length)
+            array.push(arrA[i++]);
+
+        while (j < arrB.length)
+            array.push(arrB[j++]);
+
+        return array;
+    }
 }
 
 let x = Sorting.randomArray(15)
 
-console.log(x, Sorting.countingSort([...x]))
+console.log(x, Sorting.mergeSort([...x]))
