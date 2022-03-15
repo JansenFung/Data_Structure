@@ -121,8 +121,46 @@ class Sorting{
 
         return array;
     }
+
+    static heapSort(array){
+        Sorting.#buildMaxHeap(array);
+
+        let lastElement = array.length - 1;
+
+        while(lastElement > 0){
+            Sorting.swap(array, lastElement, 0)
+            Sorting.#heapify(array, 0, lastElement--);
+        }
+
+        return array
+    }
+
+    static #heapify(array, i, max){
+        let left = 2 * i + 1,
+            right = 2 * i + 2,
+            largest = i;
+
+        if (left < max && array[left] > array[largest])
+            largest = left;
+        if (right < max && array[right] > array[largest])
+            largest = right;  
+            
+        if (largest != i){
+            Sorting.swap(array, largest, i)
+            Sorting.#heapify(array, largest, max)
+        }
+    }
+
+    static #buildMaxHeap(array){
+        let i = Math.floor(array.length / 2) - 1;
+
+        while (i >= 0)
+            Sorting.#heapify(array, i--, array.length)
+
+        return array
+    }
 }
 
 let x = Sorting.randomArray(15)
 
-console.log(x, Sorting.mergeSort([...x]))
+console.log(x, Sorting.heapSort([...x]))
