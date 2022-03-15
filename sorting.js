@@ -208,8 +208,6 @@ class Sorting{
         if (array[right] < array[middle])
             Sorting.swap(array, right, middle)
 
-        console.log(array[left], array[middle], array[right], middle)
-
         return middle;
     }
 
@@ -222,8 +220,6 @@ class Sorting{
         Sorting.swap(array, pivot, j);
 
         pivot = j;
-
-        console.log(array)
 
         while (i <= j){
             while (array[i] < pivotValue)
@@ -239,7 +235,6 @@ class Sorting{
         if (i >= j && i < pivot)
             Sorting.swap(array, i, pivot)
         
-            console.log(array)
         return i;
     }
 }
