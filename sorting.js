@@ -65,8 +65,32 @@ class Sorting{
 
         return array
     }
+
+    static countingSort(array){
+        let max = Math.max.apply(Math, array),
+            min = Math.min.apply(Math, array),
+            range = max - min + 1,
+            count = Array.from({length: range}, (v, i) => 0),
+            output = Array.from({length: array.length}, (v, i) => 0);
+
+        for (let i = 0; i < array.length; i++) 
+           count[array[i] - min]++;
+        
+        for (let i = 1; i < count.length; i++) 
+            count[i] += count[i - 1]
+
+        for (let i = array.length - 1; i >= 0; i--) {
+            output[count[array[i] - min] - 1] = array[i]
+            count[array[i] - min]--
+        }
+
+        for (let i = 0; i < array.length; i++) 
+            array[i] = output[i]
+
+        return array
+    } 
 }
 
 let x = Sorting.randomArray(15)
 
-console.log(x, Sorting.bubbleSort([...x]))
+console.log(x, Sorting.countingSort([...x]))
