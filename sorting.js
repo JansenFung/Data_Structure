@@ -127,7 +127,7 @@ class Sorting{
 
         let lastElement = array.length - 1;
 
-        while(lastElement > 0){
+        while (lastElement > 0){
             Sorting.swap(array, lastElement, 0)
             Sorting.#heapify(array, 0, lastElement--);
         }
@@ -161,7 +161,7 @@ class Sorting{
     }
 
     static notOptimizeQuickSort(array){
-        if(array.length < 2)
+        if (array.length < 2)
             return array;
         
         let middle = Math.floor(array.length / 2),
@@ -171,7 +171,7 @@ class Sorting{
 
         //or uses array.filter()
         array.forEach(num => {
-            if(num > array[middle])
+            if (num > array[middle])
                 greater.push(num);
             else if (num < array[middle])
                 smaller.push(num);
@@ -181,8 +181,69 @@ class Sorting{
 
         return [...Sorting.notOptimizeQuickSort(smaller), ...equal, ...Sorting.notOptimizeQuickSort(greater)];
     }
+
+    static quickSort(array, left = 0, right = array.length - 1){
+        if (left >= right)
+            return array;
+
+        let pivot = Sorting.#partition(array, left, right)
+
+        if (left < pivot)
+            Sorting.quickSort(array, left, pivot - 1);
+        if (right > pivot)
+            Sorting.quickSort(array, pivot + 1, right);
+
+        return array
+    }
+
+    static #findPivot(array, left, right){
+        let middle = Math.floor((left + right) / 2);
+
+        if (array[right] < array[left])
+            Sorting.swap(array, left, right)
+
+        if (array[middle] < array[left])
+            Sorting.swap(array, left, middle);
+
+        if (array[right] < array[middle])
+            Sorting.swap(array, right, middle)
+
+        console.log(array[left], array[middle], array[right], middle)
+
+        return middle;
+    }
+
+    static #partition(array, left, right){
+        let pivot = Sorting.#findPivot(array, left, right),
+            i = left + 1,
+            j = right - 1,
+            pivotValue = array[pivot];
+
+        Sorting.swap(array, pivot, j);
+
+        pivot = j;
+
+        console.log(array)
+
+        while (i <= j){
+            if(array[i] < pivotValue)
+                i++;
+            
+            if (array[j] >= pivotValue)
+                j--;
+
+            if (i <= j)
+                Sorting.swap(array, i++, j--);
+        }
+
+        if (i >= j && i < pivot)
+            Sorting.swap(array, i, pivot)
+        
+            console.log(array)
+        return i;
+    }
 }
 
 let x = Sorting.randomArray(15)
 
-console.log(x, Sorting.notOptimizeQuickSort([...x]))
+console.log(x, Sorting.quickSort([...x]))
