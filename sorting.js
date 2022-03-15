@@ -17,4 +17,19 @@ class Sorting{
     static swap(array, a, b){
         [array[a], array[b]] = [array[b], array[a]]
     }
+
+    static selectionSort(array){
+        for (let i = 0; i < array.length - 1; i++) {
+            let smallest = i
+
+            for (let j = i + 1; j < array.length; j++) {
+                if(array[j] < array[smallest])
+                    smallest = j
+            }
+
+            Sorting.swap(array, smallest, i)      
+        }
+
+        return array
+    }
 }
