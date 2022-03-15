@@ -226,10 +226,10 @@ class Sorting{
         console.log(array)
 
         while (i <= j){
-            if(array[i] < pivotValue)
+            while (array[i] < pivotValue)
                 i++;
             
-            if (array[j] >= pivotValue)
+            while (array[j] >= pivotValue)
                 j--;
 
             if (i <= j)
