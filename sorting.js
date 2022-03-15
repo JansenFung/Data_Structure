@@ -13,4 +13,8 @@ class Sorting{
             return array
         }
     }
+
+    static swap(array, a, b){
+        [array[a], array[b]] = [array[b], array[a]]
+    }
 }
