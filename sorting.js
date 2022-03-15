@@ -132,7 +132,7 @@ class Sorting{
             Sorting.#heapify(array, 0, lastElement--);
         }
 
-        return array
+        return array;
     }
 
     static #heapify(array, i, max){
@@ -146,8 +146,8 @@ class Sorting{
             largest = right;  
             
         if (largest != i){
-            Sorting.swap(array, largest, i)
-            Sorting.#heapify(array, largest, max)
+            Sorting.swap(array, largest, i);
+            Sorting.#heapify(array, largest, max);
         }
     }
 
@@ -155,12 +155,34 @@ class Sorting{
         let i = Math.floor(array.length / 2) - 1;
 
         while (i >= 0)
-            Sorting.#heapify(array, i--, array.length)
+            Sorting.#heapify(array, i--, array.length);
 
-        return array
+        return array;
+    }
+
+    static notOptimizeQuickSort(array){
+        if(array.length < 2)
+            return array;
+        
+        let middle = Math.floor(array.length / 2),
+            equal = [],
+            smaller = [],
+            greater = [];
+
+        //or uses array.filter()
+        array.forEach(num => {
+            if(num > array[middle])
+                greater.push(num);
+            else if (num < array[middle])
+                smaller.push(num);
+            else
+                equal.push(num);
+        });
+
+        return [...Sorting.notOptimizeQuickSort(smaller), ...equal, ...Sorting.notOptimizeQuickSort(greater)];
     }
 }
 
 let x = Sorting.randomArray(15)
 
-console.log(x, Sorting.heapSort([...x]))
+console.log(x, Sorting.notOptimizeQuickSort([...x]))
