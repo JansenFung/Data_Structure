@@ -55,9 +55,8 @@ class Select{
     static #buildMinHeap(array){
         let i = Math.floor(array.length / 2) - 1;
 
-        while (i >= 0){
+        while (i >= 0)
             Select.#minHeapify(array, i--, array.length);
-        }
     }
 
     static #extractMin(array){
@@ -67,7 +66,44 @@ class Select{
         array.pop();
         Select.#minHeapify(array, 0, array.length);
     }
+
+    static maxHeapSelect(array, k){
+        Select.#buildMaxHeap(array, k);
+
+        for (let i = k; i < array.length; i++) {
+            if (array[i] < array[0]) {
+               array[0] = array[i];
+               Select.#maxHeapify(array, 0, k);
+            }
+        }
+
+        return array[0];
+    }
+
+    static #maxHeapify(array, i, max){
+        let left = 2 * i + 1,
+            right = 2 * i + 2,
+            largest = i;
+
+        if (left < max && array[left] > array[largest])
+            largest = left;
+
+        if (right < max && array[right] > array[largest])
+            largest = right;
+
+        if(largest != i){
+            Select.#swap(array, i, largest);
+            Select.#maxHeapify(array, largest, max);
+        }
+    }
+
+    static #buildMaxHeap(array, size){
+        let i = Math.floor(size / 2) - 1;
+
+        while (i >= 0)
+            Select.#maxHeapify(array, i--, size);
+    }
 }
 
 const x = Select.randomArray(12);
-console.log(Sorting.insertionSort([...x]), Select.minHeapSelect([...x], 7));
+console.log(Sorting.insertionSort([...x]), Select.maxHeapSelect([...x], 7));
