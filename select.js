@@ -123,7 +123,85 @@ class Select{
             count[array[i] - min]--;
         }
     }
+
+    static quickSelect(array, k, left = 0, right = array.length - 1){
+        let pivot = Select.#partition(array, left, right);
+
+        if (k - 1 == pivot)
+            return array[pivot];
+        else if (k - 1 < pivot)
+            return Select.quickSelect(array, k, left, pivot - 1);
+        else
+            return Select.quickSelect(array, k, pivot + 1, right);
+    }
+
+    static #partition(array, left, right){
+        let pivotValue = array[right],
+            pivotLoc = left;
+
+        for (let i = left; i <= right; i++) {
+           if (array[i] < pivotValue)
+            Select.#swap(array, i, pivotLoc++);
+        }
+
+        Select.#swap(array, pivotLoc, right);
+
+        return pivotLoc;
+    }
+
+    static kthSmallest(array, k, left = 0, right = array.length - 1){
+        if (k >= 0 && k <= right - left + 1){
+            let n = right - left + 1,
+                medians = new Array(Math.floor((n + 4) / 5));
+
+                
+
+            for (let i = 0; i < n / 5; i++) {
+                if (left + (i + 1) * 5 < right)
+                    medians[i] = Select.#findMedian(array.slice(left + i * 5, left + (i + 1) * 5));
+                else
+                    medians[i] = Select.#findMedian(array.slice(left + i * 5, right + 1));
+            }
+
+            let medOfMedians = Select.#findMedian(medians),
+                pos = Select.#kthSmallestPartition(array, medOfMedians, left, right);
+
+            console.log(medians, medians.length)
+            
+            if(k - 1 == pos - left)
+                return array[pos];
+            else if (k - 1 < pos - left)
+                return Select.kthSmallest(array, k, left, pos - 1);
+            else 
+                return Select.kthSmallest(array, k-pos+left-1, pos + 1, right);
+        }
+    }
+
+    static #findMedian(array){
+        array.sort((a,b) => a - b);
+
+        return array[Math.floor(array.length / 2)];
+    }
+
+    static #kthSmallestPartition(array, med, left, right){
+        let pivotLoc = left;
+        
+        for (let i = left; i <= right; i++) {
+            if (array[i] === med)
+                Select.#swap(array, i, right);
+                break;
+        }
+
+        for (let i = left; i <= right; i++) {
+            if (array[i] < med)
+                Select.#swap(array, i, pivotLoc++);
+        }
+        
+        Select.#swap(array, right, pivotLoc);
+
+        return pivotLoc;
+    }
 }
 
 const x = Select.randomArray(12);
-console.log(Sorting.insertionSort([...x]), Select.countingSelect([...x], 7));
+console.log(Sorting.insertionSort([...x]), Select.kthSmallest([...x], 8));
