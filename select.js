@@ -16,11 +16,17 @@ class Select{
         }
     }
 
+    static #swap(array, a, b){
+        [array[a], array[b]] = [array[b], array[a]];
+    }
+
     //sort the array using O(nlogn) algorithms and select kth element
     static nLogNSelect(array, k){
         array = Sorting.mergeSort(array);
         return array[k-1];
     }
+
+    
 }
 
 const x = Select.randomArray(10);
