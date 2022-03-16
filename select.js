@@ -26,8 +26,48 @@ class Select{
         return array[k-1];
     }
 
-    
+    static minHeapSelect(array, k){
+        Select.#buildMinHeap(array);
+
+        for (let i = 0; i < k - 1; i++)
+            Select.#extractMin(array);
+
+        return array[0];
+    }
+
+    static #minHeapify(array, i, max){
+        let left = 2 * i + 1,
+            right = 2 * i + 2,
+            smallest = i;
+
+        if (left < max && array[left] < array[smallest])
+            smallest = left;
+
+        if (right < max && array[right] < array[smallest])
+            smallest = right;
+
+        if(smallest != i){
+            Select.#swap(array, i, smallest);
+            Select.#minHeapify(array, smallest, max);
+        }
+    }
+
+    static #buildMinHeap(array){
+        let i = Math.floor(array.length / 2) - 1;
+
+        while (i >= 0){
+            Select.#minHeapify(array, i--, array.length);
+        }
+    }
+
+    static #extractMin(array){
+        let lastElement = array.length - 1;
+
+        Select.#swap(array, 0, lastElement);
+        array.pop();
+        Select.#minHeapify(array, 0, array.length);
+    }
 }
 
-const x = Select.randomArray(10);
-console.log(Sorting.insertionSort([...x]), Select.nLogNSelect([...x], 4));
+const x = Select.randomArray(12);
+console.log(Sorting.insertionSort([...x]), Select.minHeapSelect([...x], 7));
