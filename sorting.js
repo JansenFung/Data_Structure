@@ -1,4 +1,4 @@
-class Sorting{
+ export class Sorting{
     static randomElement(max, min){
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
@@ -238,7 +238,3 @@ class Sorting{
         return i;
     }
 }
-
-let x = Sorting.randomArray(15)
-
-console.log(x, Sorting.quickSort([...x]))
