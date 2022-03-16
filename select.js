@@ -103,7 +103,27 @@ class Select{
         while (i >= 0)
             Select.#maxHeapify(array, i--, size);
     }
+
+    static countingSelect(array, k){
+        let max = Math.max.apply(Math, array),
+            min = Math.min.apply(Math, array),
+            range = max - min + 1,
+            count = Array.from({length: range}, (v, i) => 0);
+
+        for (let i = 0; i < array.length; i++) 
+            count[array[i] - min]++;
+
+        for (let i = 1; i < count.length; i++)
+            count[i] += count[i - 1];
+
+        for (let i = array.length - 1; i >= 0; i--) {
+            if(count[array[i] - min] == k)
+                return array[i];
+
+            count[array[i] - min]--;
+        }
+    }
 }
 
 const x = Select.randomArray(12);
-console.log(Sorting.insertionSort([...x]), Select.maxHeapSelect([...x], 7));
+console.log(Sorting.insertionSort([...x]), Select.countingSelect([...x], 7));
