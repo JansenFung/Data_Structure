@@ -87,8 +87,29 @@ class Search{
 
         return Search.recursiveBinarySearch(array, target, i/2, Math.min(i, size - 1));
     }
+
+    static interpolationSearch(array, target, startIndex = 0, endingIndex = array.length - 1){
+        if(startIndex <= endingIndex && array[endingIndex] >= target 
+            && array[startIndex] <= target){
+                
+            let pos = startIndex + 
+                        Math.floor(((endingIndex - startIndex) / 
+                                    (array[endingIndex] - array[startIndex]))
+                                    * (target - array[startIndex]));
+
+            if (array[pos] === target) 
+                return pos;
+            else if (target < array[pos])
+                return Search.interpolationSearch(array, target, startIndex, pos - 1);
+            else
+                return Search.interpolationSearch(array, target, pos + 1, endingIndex);      
+            }
+
+        return -1;
+    }
+    
 }
 
-let x = Search.randomArray(10);
+let x = Search.randomArray(15);
 
-console.log(Sorting.quickSort(x), Search.exponentialSearch(x, 6))
+console.log(Sorting.quickSort(x), Search.interpolationSearch(x, 6))
