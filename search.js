@@ -74,8 +74,21 @@ class Search{
         else
             return Search.recursiveBinarySearch(array, target, middle1 + 1, middle2 - 1);
     }
+
+    static exponentialSearch(array, target){
+        if(array[0] == target)
+            return 0;
+
+        let i = 1,
+            size = array.length;
+
+        while (i < size && array[i] <= target)
+            i *= 2;
+
+        return Search.recursiveBinarySearch(array, target, i/2, Math.min(i, size - 1));
+    }
 }
 
 let x = Search.randomArray(10);
 
-console.log(Sorting.quickSort(x), Search.ternarySearch(x, 6))
+console.log(Sorting.quickSort(x), Search.exponentialSearch(x, 6))
