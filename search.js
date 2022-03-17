@@ -55,8 +55,27 @@ class Search{
         else
             return Search.recursiveBinarySearch(array, target, middle + 1, endingIndex);
     }
+
+    static ternarySearch(array, target, startIndex = 0, endingIndex = array.length - 1){
+        if (startIndex > endingIndex)
+            return -1;
+        
+        let middle1 = startIndex + Math.floor((endingIndex - startIndex) / 3),
+            middle2 = endingIndex - Math.floor((endingIndex - startIndex) / 3);
+
+        if(array[middle1] === target)
+            return middle1;
+        else if(array[middle2] === target)
+            return middle2;
+        else if (target < array[middle1])
+            return Search.ternarySearch(array, target, startIndex, middle1 - 1);
+        else if (target > array[middle2])
+            return Search.ternarySearch(array, target, middle2 + 1, endingIndex);
+        else
+            return Search.recursiveBinarySearch(array, target, middle1 + 1, middle2 - 1);
+    }
 }
 
 let x = Search.randomArray(10);
 
-console.log(Sorting.quickSort(x), Search.recursiveBinarySearch(x, 6))
+console.log(Sorting.quickSort(x), Search.ternarySearch(x, 6))
