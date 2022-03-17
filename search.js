@@ -107,9 +107,31 @@ class Search{
 
         return -1;
     }
-    
+
+    static jumpSearch(array, target){
+        let size = array.length,
+            step = Math.sqrt(size),
+            prev = 0;
+
+        while (array[Math.min(step, size) - 1] < target) {
+            prev = step;
+            step += Math.sqrt(size);
+
+            if (prev >= size)
+                return -1;
+        }
+
+        while (array[prev] < target){
+            prev++;
+
+            if(prev === Math.min(step, size))
+                return -1;
+        }
+
+        if (array[prev] === target)
+            return prev;
+
+        return -1;
+
+    }
 }
-
-let x = Search.randomArray(15);
-
-console.log(Sorting.quickSort(x), Search.interpolationSearch(x, 6))
