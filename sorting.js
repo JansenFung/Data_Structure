@@ -1,23 +1,51 @@
  export class Sorting{
+
+    /**
+     * Generate a random number
+     * 
+     * @param {number} max Maximum number
+     * @param {number} min Minimum number
+     * @returns {number} a random number
+     */
     static randomElement(max, min){
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
 
-    static randomArray(size){
-        if(size <= 0){
+    /**
+     * Generate a random array
+     * 
+     * @param {number} n size of an array
+     * @returns a random array of size equals to n
+     */
+    static randomArray(n){
+        if(n <= 0){
             return [];
         }  
         else{
-            const array = Sorting.randomArray(size - 1);
+            const array = Sorting.randomArray(n - 1);
             array.push(Sorting.randomElement(20, -10));
             return array;
         }
     }
 
+    /**
+     * Uses Destructure assiginment to swap array element A and B
+     * 
+     * @param array
+     * @param {number} a index of element A
+     * @param {number} b index of element B
+     */
     static swap(array, a, b){
         [array[a], array[b]] = [array[b], array[a]];
     }
 
+    /**
+     * O(n^2)
+     * Stable
+     * 
+     * @param array 
+     * @returns a sorted array 
+     */
     static selectionSort(array){
         for (let i = 0; i < array.length - 1; i++) {
             let smallest = i;
@@ -33,6 +61,13 @@
         return array;
     }
 
+    /**
+     * O(n^2)
+     * Stable
+     * 
+     * @param array 
+     * @returns a sorted array 
+     */
     static insertionSort(array){
         for (let i = 1; i < array.length; i++) {
             let current = array[i],
@@ -48,6 +83,14 @@
         return array;
     }
 
+    /**
+     * Best case: O(n) if the array is sorted
+     * Worst case: O(n^2)
+     * Stable
+     * 
+     * @param array 
+     * @returns a sorted array 
+     */
     static bubbleSort(array){
         for (let i = 0; i < array.length - 1; i++) {
             let isSwap = false;
@@ -66,6 +109,13 @@
         return array
     }
 
+    /**
+     * O(n + k) where n is number of elements and k is the range of numbers
+     * Stable
+     * 
+     * @param array 
+     * @returns a sorted array 
+     */
     static countingSort(array){
         let max = Math.max.apply(Math, array),
             min = Math.min.apply(Math, array),
@@ -90,6 +140,14 @@
         return array
     }
     
+    /**
+     * Divide and conquer algorithm 
+     * O(nlogn)
+     * Stable
+     * 
+     * @param array 
+     * @returns a sorted array
+     */
     static mergeSort(array){
         if(array.length < 2)
             return array;
@@ -101,6 +159,12 @@
         return Sorting.#merge(left, right);
     }
 
+    /**
+     * 
+     * @param arrA 1st array 
+     * @param arrB 2nd array
+     * @returns a sorted comnined array of 2 arrays
+     */
     static #merge(arrA, arrB){
         let i = 0,
             j = 0,
