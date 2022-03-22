@@ -92,7 +92,7 @@
      * @returns a sorted array 
      */
     static bubbleSort(array){
-        for (let i = 0; i < array.length - 1; i++) {
+        for (let i = 0; i < array.length; i++) {
             let isSwap = false;
 
             for (let j = 0; j < array.length - i - 1; j++) {
@@ -160,6 +160,7 @@
     }
 
     /**
+     * Merge 2 arrays
      * 
      * @param arrA 1st array 
      * @param arrB 2nd array
@@ -186,6 +187,13 @@
         return array;
     }
 
+    /**
+     * O(nlogn)
+     * Not stable
+     * 
+     * @param array 
+     * @returns a sorted array 
+     */
     static heapSort(array){
         Sorting.#buildMaxHeap(array);
 
@@ -199,6 +207,13 @@
         return array;
     }
 
+    /**
+     * Heapify down, swap the parent and child elements if parent element is not the largest element compares to its children
+     * 
+     * @param array 
+     * @param number i starting index 
+     * @param number max ending index (excluded)
+     */
     static #heapify(array, i, max){
         let left = 2 * i + 1,
             right = 2 * i + 2,
@@ -215,6 +230,12 @@
         }
     }
 
+    /**
+     * Build a max heap
+     * 
+     * @param array 
+     * @returns a max heap
+     */
     static #buildMaxHeap(array){
         let i = Math.floor(array.length / 2) - 1;
 
@@ -224,6 +245,13 @@
         return array;
     }
 
+    /**
+     * Best case: O(nlogn)
+     * Worst case: O(n^2) if always pick either smallest or largest element as a pivot
+     * 
+     * @param array 
+     * @returns a sorted array 
+     */
     static notOptimizeQuickSort(array){
         if (array.length < 2)
             return array;
@@ -234,6 +262,7 @@
             greater = [];
 
         //or uses array.filter()
+        //e.g equal = array.filter(element => element === array[middle]);
         array.forEach(num => {
             if (num > array[middle])
                 greater.push(num);
@@ -302,3 +331,6 @@
         return i;
     }
 }
+
+let x = Sorting.randomArray(20)
+console.log(x, Sorting.bubbleSort([...x]))
