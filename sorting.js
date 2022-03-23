@@ -29,8 +29,7 @@
     }
 
     /**
-     * Uses Destructure assiginment to swap array element A and B
-     * 
+     * Uses Destructure assiginment to swap element A and B in an array
      * @param array
      * @param {number} a index of element A
      * @param {number} b index of element B
@@ -275,6 +274,15 @@
         return [...Sorting.notOptimizeQuickSort(smaller), ...equal, ...Sorting.notOptimizeQuickSort(greater)];
     }
 
+    /**
+     * O(nlogn)
+     * Not stable
+     * 
+     * @param array 
+     * @param number left starting index
+     * @param number right ending index 
+     * @returns 
+     */
     static quickSort(array, left = 0, right = array.length - 1){
         if (left >= right)
             return array;
@@ -289,6 +297,14 @@
         return array
     }
 
+    /**
+     * Find a pivot by picking the leftmost, middle, and rightmost element and sort them
+     * 
+     * @param array 
+     * @param number left leftmost index
+     * @param number right rightmost index 
+     * @returns a pivot
+     */
     static #findPivot(array, left, right){
         let middle = Math.floor((left + right) / 2);
 
@@ -304,6 +320,15 @@
         return middle;
     }
 
+    /**
+     * Partiton around the pivot, all elements less than pivot are on the left side of the pivot
+     * all element are larger than pivot are on the right side of the pivot
+     * 
+     * @param array 
+     * @param number left starting index 
+     * @param number right starting index
+     * @returns a partiton array
+     */
     static #partition(array, left, right){
         let pivot = Sorting.#findPivot(array, left, right),
             i = left + 1,
@@ -331,6 +356,3 @@
         return i;
     }
 }
-
-let x = Sorting.randomArray(20)
-console.log(x, Sorting.bubbleSort([...x]))
