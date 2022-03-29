@@ -33,7 +33,7 @@ class Search{
      * 
      * @param array 
      * @param number target  
-     * @returns an index of a target
+     * @returns an index of a target. Otherwise returns -1
      */
     static linearSearch(array, target){
         for (let i = 0; i < array.length; i++) {
@@ -44,17 +44,27 @@ class Search{
         return -1;
     }
 
-    //while loop
-    static binarySearch(array, target, startIndex = 0, endingIndex = array.length - 1){
-        while(startIndex <= endingIndex){
-            let middle = Math.floor((startIndex + endingIndex) / 2);
+
+    /**
+     * O(logN)
+     * whileLoop approach
+     * 
+     * @param array 
+     * @param number target 
+     * @param number startingIndex 
+     * @param number endingIndex 
+     * @returns an index of a target. Otherwise returns -1 
+     */
+    static binarySearch(array, target, startingIndex = 0, endingIndex = array.length - 1){
+        while(startingIndex <= endingIndex){
+            let middle = Math.floor((startingIndex + endingIndex) / 2);
 
             if(array[middle] === target)
                 return middle;
             else if (target < array[middle])
                 endingIndex = middle - 1;
             else
-                startIndex = middle + 1;
+                startingIndex = middle + 1;
         }
 
         return -1;
