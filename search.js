@@ -1,6 +1,12 @@
-import {Sorting} from './sorting.js';
-
 class Search{
+
+    /**
+     * Generates a random number between max and min
+     * 
+     * @param number max 
+     * @param number min 
+     * @returns a random number between max and min
+     */
     static randomElement(max, min){
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
