@@ -94,19 +94,28 @@ class Search{
             return Search.recursiveBinarySearch(array, target, middle + 1, endingIndex);
     }
 
-    static ternarySearch(array, target, startIndex = 0, endingIndex = array.length - 1){
-        if (startIndex > endingIndex)
+    /**
+     * O(logN)
+     * 
+     * @param array a sorted array
+     * @param number target 
+     * @param number startingIndex 
+     * @param number endingIndex 
+     * @returns an index of a target. Otherwise returns -1 
+     */
+    static ternarySearch(array, target, startingIndex = 0, endingIndex = array.length - 1){
+        if (startingIndex > endingIndex)
             return -1;
         
-        let middle1 = startIndex + Math.floor((endingIndex - startIndex) / 3),
-            middle2 = endingIndex - Math.floor((endingIndex - startIndex) / 3);
+        let middle1 = startingIndex + Math.floor((endingIndex - startingIndex) / 3),
+            middle2 = endingIndex - Math.floor((endingIndex - startingIndex) / 3);
 
         if(array[middle1] === target)
             return middle1;
         else if(array[middle2] === target)
             return middle2;
         else if (target < array[middle1])
-            return Search.ternarySearch(array, target, startIndex, middle1 - 1);
+            return Search.ternarySearch(array, target, startingIndex, middle1 - 1);
         else if (target > array[middle2])
             return Search.ternarySearch(array, target, middle2 + 1, endingIndex);
         else
