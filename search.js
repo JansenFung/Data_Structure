@@ -28,6 +28,13 @@ class Search{
         }
     }
 
+    /**
+     * O(n)
+     * 
+     * @param array 
+     * @param number target  
+     * @returns an index of a target
+     */
     static linearSearch(array, target){
         for (let i = 0; i < array.length; i++) {
             if(array[i] === target)
