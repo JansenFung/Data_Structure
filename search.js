@@ -11,6 +11,12 @@ class Search{
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
 
+    /**
+     * Generates an array with random elements
+     * 
+     * @param number size 
+     * @returns an array of size equals to given size
+     */
     static randomArray(size){
         if(size <= 0){
             return [];
