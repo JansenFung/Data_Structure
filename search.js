@@ -70,17 +70,26 @@ class Search{
         return -1;
     }
 
-    //Recursive approach
-    static recursiveBinarySearch(array, target, startIndex = 0, endingIndex = array.length - 1){
-        if (startIndex > endingIndex)
+    /**
+     * O(logN)
+     * Recursive approach 
+     * 
+     * @param array 
+     * @param number target 
+     * @param number startingIndex 
+     * @param number endingIndex 
+     * @returns an index of a target. Otherwise returns -1 
+     */
+    static recursiveBinarySearch(array, target, startingIndex = 0, endingIndex = array.length - 1){
+        if (startingIndex > endingIndex)
             return -1;
         
-        let middle = Math.floor((startIndex + endingIndex) / 2);
+        let middle = Math.floor((startingIndex + endingIndex) / 2);
 
         if(array[middle] === target)
             return middle;
         else if (target < array[middle])
-            return Search.recursiveBinarySearch(array, target, startIndex, middle - 1);
+            return Search.recursiveBinarySearch(array, target, startingIndex, middle - 1);
         else
             return Search.recursiveBinarySearch(array, target, middle + 1, endingIndex);
     }
