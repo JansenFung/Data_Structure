@@ -49,7 +49,7 @@ class Search{
      * O(logN)
      * whileLoop approach
      * 
-     * @param array 
+     * @param array a sorted array
      * @param number target 
      * @param number startingIndex 
      * @param number endingIndex 
@@ -74,7 +74,7 @@ class Search{
      * O(logN)
      * Recursive approach 
      * 
-     * @param array 
+     * @param array a sorted array
      * @param number target 
      * @param number startingIndex 
      * @param number endingIndex 
