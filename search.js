@@ -122,6 +122,13 @@ class Search{
             return Search.recursiveBinarySearch(array, target, middle1 + 1, middle2 - 1);
     }
 
+    /**
+     * O(logN)
+     * 
+     * @param array 
+     * @param number target 
+     * @returns an index of a target. Otherwise returns -1
+     */
     static exponentialSearch(array, target){
         if(array[0] == target)
             return 0;
