@@ -142,19 +142,28 @@ class Search{
         return Search.recursiveBinarySearch(array, target, i/2, Math.min(i, size - 1));
     }
 
-    static interpolationSearch(array, target, startIndex = 0, endingIndex = array.length - 1){
-        if(startIndex <= endingIndex && array[endingIndex] >= target 
-            && array[startIndex] <= target){
+    /**
+     * O(loglogN)
+     * 
+     * @param array 
+     * @param number target 
+     * @param number startingIndex 
+     * @param number endingIndex 
+     * @returns an index of a target. Otherwise returns -1
+     */
+    static interpolationSearch(array, target, startingIndex = 0, endingIndex = array.length - 1){
+        if(startingIndex <= endingIndex && array[endingIndex] >= target 
+            && array[startingIndex] <= target){
                 
-            let pos = startIndex + 
-                        Math.floor(((endingIndex - startIndex) / 
-                                    (array[endingIndex] - array[startIndex]))
-                                    * (target - array[startIndex]));
+            let pos = startingIndex + 
+                        Math.floor(((endingIndex - startingIndex) / 
+                                    (array[endingIndex] - array[startingIndex]))
+                                    * (target - array[startingIndex]));
 
             if (array[pos] === target) 
                 return pos;
             else if (target < array[pos])
-                return Search.interpolationSearch(array, target, startIndex, pos - 1);
+                return Search.interpolationSearch(array, target, startingIndex, pos - 1);
             else
                 return Search.interpolationSearch(array, target, pos + 1, endingIndex);      
             }
@@ -162,6 +171,13 @@ class Search{
         return -1;
     }
 
+    /**
+     * O(sqrt(n))
+     * 
+     * @param array 
+     * @param number target 
+     * @returns an index of a target. Otherwise returns -1
+     */
     static jumpSearch(array, target){
         let size = array.length,
             step = Math.sqrt(size),
