@@ -44,7 +44,7 @@ class Select{
      * 
      * @param {*} array 
      * @param {number} k kth smallest element 
-     * @returns an index of the kth smallest element
+     * @returns the kth smallest element
      */
     static nLogNSelect(array, k){
         array = Sorting.mergeSort(array);
@@ -53,10 +53,11 @@ class Select{
 
     /**
      * Gerenates a Min Heap and calls extractMin Method k-1 times
+     * O(n + klogn)
      * 
      * @param {*} array 
      * @param {number} k kth smallest element
-     * @returns an index of the kth smallest element
+     * @returns the kth smallest element
      */
     static minHeapSelect(array, k){
         Select.#buildMinHeap(array);
@@ -119,10 +120,11 @@ class Select{
     /**
      * Make a Max Heap from 0 to k-1th element, then starting from kth element, compares it to the root of a Max Heap
      * If the kth element is less than the root, replace the root with the kth element
+     * O(k + (n-k)logk)
      * 
      * @param {*} array 
      * @param {number} k kth smallest element 
-     * @returns an index of the kth smallest element
+     * @returns the kth smallest element
      */
     static maxHeapSelect(array, k){
         Select.#buildMaxHeap(array, k);
@@ -174,6 +176,14 @@ class Select{
             Select.#maxHeapify(array, i--, size);
     }
 
+    /**
+     * Similar to Counting Sort
+     * O(n + range)
+     * 
+     * @param {*} array 
+     * @param {number} k kth smallest element 
+     * @returns the kth smallest element
+     */
     static countingSelect(array, k){
         let max = Math.max.apply(Math, array),
             min = Math.min.apply(Math, array),
