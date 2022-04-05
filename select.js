@@ -51,6 +51,13 @@ class Select{
         return array[k-1];
     }
 
+    /**
+     * Gerenates a Min Heap and calls extractMin Method k-1 times
+     * 
+     * @param {*} array 
+     * @param {number} k kth smallest element
+     * @returns an index of the kth smallest element
+     */
     static minHeapSelect(array, k){
         Select.#buildMinHeap(array);
 
