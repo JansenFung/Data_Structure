@@ -140,18 +140,11 @@ class Select{
     }
 
     /**
-<<<<<<< HEAD
      * Heapify the array
      * 
      * @param {*} array 
      * @param {number} i starting index
      * @param {number} max size of the max heap
-=======
-     * 
-     * @param {*} array 
-     * @param {*} i 
-     * @param {*} max 
->>>>>>> 40fdb97aadd5ad9a1605e6d3aa216bd49d2506c6
      */
     static #maxHeapify(array, i, max){
         let left = 2 * i + 1,
