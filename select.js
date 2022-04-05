@@ -120,11 +120,18 @@ class Select{
     /**
      * Make a Max Heap from 0 to k-1th element, then starting from kth element, compares it to the root of a Max Heap
      * If the kth element is less than the root, replace the root with the kth element
+<<<<<<< HEAD
      * O(k + (n-k)logk)
      * 
      * @param {*} array 
      * @param {number} k kth smallest element 
      * @returns the kth smallest element
+=======
+     * 
+     * @param {*} array 
+     * @param {number} k kth smallest element 
+     * @returns an index of the kth smallest element
+>>>>>>> 40fdb97aadd5ad9a1605e6d3aa216bd49d2506c6
      */
     static maxHeapSelect(array, k){
         Select.#buildMaxHeap(array, k);
@@ -140,11 +147,18 @@ class Select{
     }
 
     /**
+<<<<<<< HEAD
      * Heapify the array
      * 
      * @param {*} array 
      * @param {number} i starting index
      * @param {number} max size of the max heap
+=======
+     * 
+     * @param {*} array 
+     * @param {*} i 
+     * @param {*} max 
+>>>>>>> 40fdb97aadd5ad9a1605e6d3aa216bd49d2506c6
      */
     static #maxHeapify(array, i, max){
         let left = 2 * i + 1,
