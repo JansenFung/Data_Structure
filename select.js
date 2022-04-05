@@ -67,6 +67,13 @@ class Select{
         return array[0];
     }
 
+    /**
+     * Heapify the array
+     * 
+     * @param {*} array 
+     * @param {number} i starting index 
+     * @param {number} max ending index (excluded) 
+     */
     static #minHeapify(array, i, max){
         let left = 2 * i + 1,
             right = 2 * i + 2,
@@ -84,6 +91,11 @@ class Select{
         }
     }
 
+    /**
+     * Build a Min Heap
+     * 
+     * @param {*} array 
+     */
     static #buildMinHeap(array){
         let i = Math.floor(array.length / 2) - 1;
 
@@ -91,6 +103,11 @@ class Select{
             Select.#minHeapify(array, i--, array.length);
     }
 
+    /**
+     * Remove the smallest item from a Min Heap
+     * 
+     * @param {*} array 
+     */
     static #extractMin(array){
         let lastElement = array.length - 1;
 
