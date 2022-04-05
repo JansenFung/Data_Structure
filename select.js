@@ -116,6 +116,14 @@ class Select{
         Select.#minHeapify(array, 0, array.length);
     }
 
+    /**
+     * Make a Max Heap from 0 to k-1th element, then starting from kth element, compares it to the root of a Max Heap
+     * If the kth element is less than the root, replace the root with the kth element
+     * 
+     * @param {*} array 
+     * @param {number} k kth smallest element 
+     * @returns an index of the kth smallest element
+     */
     static maxHeapSelect(array, k){
         Select.#buildMaxHeap(array, k);
 
@@ -129,6 +137,12 @@ class Select{
         return array[0];
     }
 
+    /**
+     * 
+     * @param {*} array 
+     * @param {*} i 
+     * @param {*} max 
+     */
     static #maxHeapify(array, i, max){
         let left = 2 * i + 1,
             right = 2 * i + 2,
