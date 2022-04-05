@@ -1,4 +1,4 @@
- export class Sorting{
+ export default class Sorting{
 
     /**
      * Generate a random number

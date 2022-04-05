@@ -1,10 +1,22 @@
-import {Sorting} from './sorting.js';
+import Sorting from "./sorting.js"
 
 class Select{
+    /**
+     * Gerenates a random number
+     * 
+     * @param {number} max 
+     * @param {number} min 
+     * @returns a random number between the given range
+     */
     static randomElement(max, min){
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
 
+    /**
+     * Gerenates a random array
+     * @param {number} size 
+     * @returns a array with random elements
+     */
     static randomArray(size){
         if(size <= 0){
             return [];
@@ -16,11 +28,24 @@ class Select{
         }
     }
 
+    /**
+     * Use destructing assignment ot swap 2 elements
+     * 
+     * @param {*} array 
+     * @param {number} a index
+     * @param {number} b index
+     */
     static #swap(array, a, b){
         [array[a], array[b]] = [array[b], array[a]];
     }
 
-    //sort the array using O(nlogn) algorithms and select kth element
+    /**
+     * Sort the array using O(nlogn) algorithms and select kth element
+     * 
+     * @param {*} array 
+     * @param {number} k kth smallest element 
+     * @returns an index of the kth smallest element
+     */
     static nLogNSelect(array, k){
         array = Sorting.mergeSort(array);
         return array[k-1];
@@ -202,6 +227,3 @@ class Select{
         return pivotLoc;
     }
 }
-
-const x = Select.randomArray(12);
-console.log(Sorting.insertionSort([...x]), Select.kthSmallest([...x], 8));
