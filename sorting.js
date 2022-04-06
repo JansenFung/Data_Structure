@@ -209,9 +209,9 @@
     /**
      * Heapify down, swap the parent and child elements if parent element is not the largest element compares to its children
      * 
-     * @param array 
-     * @param number i starting index 
-     * @param number max ending index (excluded)
+     * @param {*} array 
+     * @param {number} i starting index 
+     * @param {number} max ending index (excluded)
      */
     static #heapify(array, i, max){
         let left = 2 * i + 1,
@@ -232,7 +232,7 @@
     /**
      * Build a max heap
      * 
-     * @param array 
+     * @param {*} array 
      * @returns a max heap
      */
     static #buildMaxHeap(array){
