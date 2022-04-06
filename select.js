@@ -204,6 +204,16 @@ class Select{
         }
     }
 
+    /**
+     * Average: O(n)
+     * Worst: O(n^2) if always pick either the smallest or the largest element as a pivot
+     * 
+     * @param {*} array 
+     * @param {number} k kth smallest element
+     * @param {number} left starting index
+     * @param {number} right ending index
+     * @returns the kth smallest element
+     */
     static quickSelect(array, k, left = 0, right = array.length - 1){
         let pivot = Select.#partition(array, left, right);
 
@@ -215,6 +225,14 @@ class Select{
             return Select.quickSelect(array, k, pivot + 1, right);
     }
 
+    /**
+     * Partition an array with a pivot
+     * 
+     * @param {*} array 
+     * @param {number} left starting index
+     * @param {number} right ending index
+     * @returns a partition array
+     */
     static #partition(array, left, right){
         let pivotValue = array[right],
             pivotLoc = left;
