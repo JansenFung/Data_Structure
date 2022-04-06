@@ -30,7 +30,7 @@
 
     /**
      * Uses Destructure assiginment to swap element A and B in an array
-     * @param array
+     * @param {*} array
      * @param {number} a index of element A
      * @param {number} b index of element B
      */
@@ -42,7 +42,7 @@
      * O(n^2)
      * Stable
      * 
-     * @param array 
+     * @param {*} array 
      * @returns a sorted array 
      */
     static selectionSort(array){
@@ -64,7 +64,7 @@
      * O(n^2)
      * Stable
      * 
-     * @param array 
+     * @param {*} array 
      * @returns a sorted array 
      */
     static insertionSort(array){
@@ -87,7 +87,7 @@
      * Worst case: O(n^2)
      * Stable
      * 
-     * @param array 
+     * @param {*} array 
      * @returns a sorted array 
      */
     static bubbleSort(array){
@@ -112,7 +112,7 @@
      * O(n + k) where n is number of elements and k is the range of numbers
      * Stable
      * 
-     * @param array 
+     * @param {*} array 
      * @returns a sorted array 
      */
     static countingSort(array){
@@ -144,7 +144,7 @@
      * O(nlogn)
      * Stable
      * 
-     * @param array 
+     * @param {*} array 
      * @returns a sorted array
      */
     static mergeSort(array){
@@ -161,8 +161,8 @@
     /**
      * Merge 2 arrays
      * 
-     * @param arrA 1st array 
-     * @param arrB 2nd array
+     * @param {*} arrA 1st array 
+     * @param {*} arrB 2nd array
      * @returns a sorted comnined array of 2 arrays
      */
     static #merge(arrA, arrB){
@@ -190,7 +190,7 @@
      * O(nlogn)
      * Not stable
      * 
-     * @param array 
+     * @param {*} array 
      * @returns a sorted array 
      */
     static heapSort(array){
