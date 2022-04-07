@@ -264,9 +264,7 @@ class Select{
     static kthSmallest(array, k, left = 0, right = array.length - 1){
         if (k >= 0 && k <= right - left + 1){
             let n = right - left + 1,
-                medians = new Array(Math.floor((n + 4) / 5));
-
-                
+                medians = new Array(Math.floor((n + 4) / 5));             
 
             for (let i = 0; i < n / 5; i++) {
                 if (left + (i + 1) * 5 < right)
@@ -327,3 +325,7 @@ class Select{
         return pivotLoc;
     }
 }
+
+const x = Select.randomArray(15);
+
+console.log(Select.kthSmallest([...x], 6), Sorting.insertionSort([...x]))
