@@ -226,7 +226,7 @@ class Select{
     }
 
     /**
-     * Partition an array with a pivot
+     * Partition an array around the pivot
      * 
      * @param {*} array 
      * @param {number} left starting index
@@ -247,6 +247,20 @@ class Select{
         return pivotLoc;
     }
 
+    /**
+     * Divide the array into groups of five, sort each group.  
+     * Pick the median from each group and store into an array
+     * Sort that array and pick the median of the medians as a pivot
+     * Partition the array around the pivot
+     * 
+     * Worst: O(n)
+     * 
+     * @param {*} array 
+     * @param {number} k 
+     * @param {number} left starting index
+     * @param {number} right ending index
+     * @returns the kth smallest element
+     */
     static kthSmallest(array, k, left = 0, right = array.length - 1){
         if (k >= 0 && k <= right - left + 1){
             let n = right - left + 1,
