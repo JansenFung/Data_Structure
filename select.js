@@ -277,8 +277,6 @@ class Select{
 
             let medOfMedians = Select.#findMedian(medians),
                 pos = Select.#kthSmallestPartition(array, medOfMedians, left, right);
-
-            console.log(medians, medians.length)
             
             if(k - 1 == pos - left)
                 return array[pos];
@@ -289,12 +287,27 @@ class Select{
         }
     }
 
+    /**
+     * Find the median of the array
+     * 
+     * @param {*} array 
+     * @returns the median
+     */
     static #findMedian(array){
         array.sort((a,b) => a - b);
 
         return array[Math.floor(array.length / 2)];
     }
 
+    /**
+     * Partition an array
+     * 
+     * @param {*} array 
+     * @param {number} med 
+     * @param {number} left staring index
+     * @param {number} right ending index
+     * @returns a partition array
+     */
     static #kthSmallestPartition(array, med, left, right){
         let pivotLoc = left;
         
