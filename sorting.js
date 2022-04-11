@@ -250,7 +250,7 @@ export default class Sorting {
      * @param array 
      * @returns a sorted array 
      */
-    static notOptimizeQuickSort(array){
+    static notOptimizeQuickSort (array) {
         if (array.length < 2)
             return array;
         
@@ -282,11 +282,11 @@ export default class Sorting {
      * @param number right ending index 
      * @returns 
      */
-    static quickSort(array, left = 0, right = array.length - 1){
+    static quickSort (array, left = 0, right = array.length - 1) {
         if (left >= right)
             return array;
 
-        let pivot = Sorting.#partition(array, left, right)
+        let pivot = Sorting.#partition(array, left, right);
 
         if (left < pivot)
             Sorting.quickSort(array, left, pivot - 1);
@@ -304,7 +304,7 @@ export default class Sorting {
      * @param number right rightmost index 
      * @returns a pivot
      */
-    static #findPivot(array, left, right){
+    static #findPivot (array, left, right) {
         let middle = Math.floor((left + right) / 2);
 
         if (array[right] < array[left])
@@ -328,7 +328,7 @@ export default class Sorting {
      * @param number right starting index
      * @returns a partiton array
      */
-    static #partition(array, left, right){
+    static #partition (array, left, right) {
         let pivot = Sorting.#findPivot(array, left, right),
             i = left + 1,
             j = right - 1,
@@ -338,7 +338,7 @@ export default class Sorting {
 
         pivot = j;
 
-        while (i <= j){
+        while (i <= j) {
             while (array[i] < pivotValue)
                 i++;
             
