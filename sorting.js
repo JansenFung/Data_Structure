@@ -1,5 +1,4 @@
- export default class Sorting{
-
+export default class Sorting {
     /**
      * Generate a random number
      * 
@@ -7,9 +6,9 @@
      * @param {number} min Minimum number
      * @returns {number} a random number
      */
-    static randomElement(max, min){
-        return Math.floor(Math.random() * (max - min + 1) + min);
-    }
+     static randomElement (max, min) {
+         return Math.floor(Math.random() * (max - min + 1) + min);
+     }
 
     /**
      * Generate a random array
@@ -17,16 +16,16 @@
      * @param {number} n size of an array
      * @returns a random array of size equals to n
      */
-    static randomArray(n){
-        if(n <= 0){
-            return [];
-        }  
-        else{
-            const array = Sorting.randomArray(n - 1);
-            array.push(Sorting.randomElement(20, -10));
-            return array;
-        }
-    }
+     static randomArray (n) {
+         if (n <= 0) {
+             return [];
+         }
+         else {
+             const array = Sorting.randomArray(n - 1);
+             array.push(Sorting.randomElement(20, -10));
+             return array;
+         }
+     }
 
     /**
      * Uses Destructure assiginment to swap element A and B in an array
@@ -34,9 +33,9 @@
      * @param {number} a index of element A
      * @param {number} b index of element B
      */
-    static swap(array, a, b){
-        [array[a], array[b]] = [array[b], array[a]];
-    }
+     static swap (array, a, b) {    
+         [array[a], array[b]] = [array[b], array[a]];
+     }
 
     /**
      * O(n^2)
@@ -45,20 +44,20 @@
      * @param {*} array 
      * @returns a sorted array 
      */
-    static selectionSort(array){
+     static selectionSort (array) {
         for (let i = 0; i < array.length - 1; i++) {
             let smallest = i;
-
+            
             for (let j = i + 1; j < array.length; j++) {
                 if(array[j] < array[smallest])
                     smallest = j;
             }
 
-            Sorting.swap(array, smallest, i);   
+            Sorting.swap(array, smallest, i);
         }
-
-        return array;
-    }
+         
+         return array;
+     }
 
     /**
      * O(n^2)
@@ -355,4 +354,4 @@
         
         return i;
     }
-}
+ }
