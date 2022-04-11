@@ -6,9 +6,9 @@ export default class Sorting {
      * @param {number} min Minimum number
      * @returns {number} a random number
      */
-     static randomElement (max, min) {
-         return Math.floor(Math.random() * (max - min + 1) + min);
-     }
+    static randomElement (max, min) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
 
     /**
      * Generate a random array
@@ -66,7 +66,7 @@ export default class Sorting {
      * @param {*} array 
      * @returns a sorted array 
      */
-    static insertionSort(array){
+    static insertionSort (array) {
         for (let i = 1; i < array.length; i++) {
             let current = array[i],
                 j;
@@ -89,12 +89,12 @@ export default class Sorting {
      * @param {*} array 
      * @returns a sorted array 
      */
-    static bubbleSort(array){
+    static bubbleSort (array) { 
         for (let i = 0; i < array.length; i++) {
             let isSwap = false;
 
             for (let j = 0; j < array.length - i - 1; j++) {
-                if(array[j] > array[j + 1]){
+                if (array[j] > array[j + 1]) {
                     Sorting.swap(array, j , j + 1);
                     isSwap = true;
                 }
@@ -114,12 +114,12 @@ export default class Sorting {
      * @param {*} array 
      * @returns a sorted array 
      */
-    static countingSort(array){
+    static countingSort (array) {
         let max = Math.max.apply(Math, array),
             min = Math.min.apply(Math, array),
             range = max - min + 1,
-            count = Array.from({length: range}, (v, i) => 0),
-            output = Array.from({length: array.length}, (v, i) => 0);
+            count = Array.from({ length: range }, (v, i) => 0),
+            output = Array.from({ length: array.length }, (v, i) => 0);
 
         for (let i = 0; i < array.length; i++) 
            count[array[i] - min]++;
@@ -146,11 +146,11 @@ export default class Sorting {
      * @param {*} array 
      * @returns a sorted array
      */
-    static mergeSort(array){
+    static mergeSort (array) {
         if(array.length < 2)
             return array;
         
-        let middle = Math.floor(array.length / 2), 
+        let middle = Math.floor(array.length / 2),
             left = Sorting.mergeSort(array.slice(0, middle)),
             right = Sorting.mergeSort(array.slice(middle));
 
@@ -164,12 +164,12 @@ export default class Sorting {
      * @param {*} arrB 2nd array
      * @returns a sorted comnined array of 2 arrays
      */
-    static #merge(arrA, arrB){
+    static #merge (arrA, arrB) {
         let i = 0,
             j = 0,
             array = [];
 
-        while (i < arrA.length && j < arrB.length){
+        while (i < arrA.length && j < arrB.length) {
             if (arrA[i] < arrB[j])
                 array.push(arrA[i++]);
             else
@@ -192,13 +192,13 @@ export default class Sorting {
      * @param {*} array 
      * @returns a sorted array 
      */
-    static heapSort(array){
+    static heapSort (array) {
         Sorting.#buildMaxHeap(array);
 
         let lastElement = array.length - 1;
 
-        while (lastElement > 0){
-            Sorting.swap(array, lastElement, 0)
+        while (lastElement > 0) {
+            Sorting.swap(array, lastElement, 0);
             Sorting.#heapify(array, 0, lastElement--);
         }
 
@@ -212,7 +212,7 @@ export default class Sorting {
      * @param {number} i starting index 
      * @param {number} max ending index (excluded)
      */
-    static #heapify(array, i, max){
+    static #heapify (array, i, max) {
         let left = 2 * i + 1,
             right = 2 * i + 2,
             largest = i;
@@ -222,7 +222,7 @@ export default class Sorting {
         if (right < max && array[right] > array[largest])
             largest = right;  
             
-        if (largest != i){
+        if (largest != i) {
             Sorting.swap(array, largest, i);
             Sorting.#heapify(array, largest, max);
         }
@@ -234,7 +234,7 @@ export default class Sorting {
      * @param {*} array 
      * @returns a max heap
      */
-    static #buildMaxHeap(array){
+    static #buildMaxHeap (array) {
         let i = Math.floor(array.length / 2) - 1;
 
         while (i >= 0)
