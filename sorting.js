@@ -302,7 +302,7 @@ export default class Sorting {
      * @param array 
      * @param number left leftmost index
      * @param number right rightmost index 
-     * @returns a pivot
+     * @returns Index of a pivot
      */
     static #findPivot (array, left, right) {
         let middle = Math.floor((left + right) / 2);
