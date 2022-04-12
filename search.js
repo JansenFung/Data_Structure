@@ -3,25 +3,25 @@ class Search{
     /**
      * Generates a random number between max and min
      * 
-     * @param number max 
-     * @param number min 
-     * @returns a random number between max and min
+     * @param {number} max 
+     * @param {number} min 
+     * @returns {number} a random number between max and min
      */
-    static randomElement(max, min){
+    static randomElement (max, min) {
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
 
     /**
      * Generates an array with random elements
      * 
-     * @param number size 
-     * @returns an array of size equals to given size
+     * @param {number} size 
+     * @returns {*} an array of size equals to given size
      */
-    static randomArray(size){
-        if(size <= 0){
+    static randomArray (size) {
+        if (size <= 0) {
             return [];
         }
-        else{
+        else {
             const array = Search.randomArray(size - 1);
             array.push(Search.randomElement(20, -10));
             return array;
@@ -31,11 +31,11 @@ class Search{
     /**
      * O(n)
      * 
-     * @param array 
-     * @param number target  
-     * @returns an index of a target. Otherwise returns -1
+     * @param {*} array 
+     * @param {number} target  
+     * @returns {number} an index of a target. Otherwise returns -1
      */
-    static linearSearch(array, target){
+    static linearSearch (array, target) {
         for (let i = 0; i < array.length; i++) {
             if(array[i] === target)
                 return i;
@@ -49,14 +49,14 @@ class Search{
      * O(logN)
      * whileLoop approach
      * 
-     * @param array a sorted array
-     * @param number target 
-     * @param number startingIndex 
-     * @param number endingIndex 
-     * @returns an index of a target. Otherwise returns -1 
+     * @param {*} array a sorted array
+     * @param {number} target 
+     * @param {number} startingIndex 
+     * @param {number} endingIndex 
+     * @returns {number} an index of a target. Otherwise returns -1 
      */
-    static binarySearch(array, target, startingIndex = 0, endingIndex = array.length - 1){
-        while(startingIndex <= endingIndex){
+    static binarySearch (array, target, startingIndex = 0, endingIndex = array.length - 1) {
+        while (startingIndex <= endingIndex) {
             let middle = Math.floor((startingIndex + endingIndex) / 2);
 
             if(array[middle] === target)
@@ -74,13 +74,13 @@ class Search{
      * O(logN)
      * Recursive approach 
      * 
-     * @param array a sorted array
-     * @param number target 
-     * @param number startingIndex 
-     * @param number endingIndex 
-     * @returns an index of a target. Otherwise returns -1 
+     * @param {*} array a sorted array
+     * @param {number} target 
+     * @param {number} startingIndex 
+     * @param {number} endingIndex 
+     * @returns {number} an index of a target. Otherwise returns -1 
      */
-    static recursiveBinarySearch(array, target, startingIndex = 0, endingIndex = array.length - 1){
+    static recursiveBinarySearch (array, target, startingIndex = 0, endingIndex = array.length - 1) {
         if (startingIndex > endingIndex)
             return -1;
         
@@ -97,13 +97,13 @@ class Search{
     /**
      * O(logN)
      * 
-     * @param array a sorted array
-     * @param number target 
-     * @param number startingIndex 
-     * @param number endingIndex 
-     * @returns an index of a target. Otherwise returns -1 
+     * @param {*} array a sorted array
+     * @param {number} target 
+     * @param {number} startingIndex 
+     * @param {number} endingIndex 
+     * @returns {number} an index of a target. Otherwise returns -1 
      */
-    static ternarySearch(array, target, startingIndex = 0, endingIndex = array.length - 1){
+    static ternarySearch (array, target, startingIndex = 0, endingIndex = array.length - 1) {
         if (startingIndex > endingIndex)
             return -1;
         
@@ -125,11 +125,11 @@ class Search{
     /**
      * O(logN)
      * 
-     * @param array 
-     * @param number target 
-     * @returns an index of a target. Otherwise returns -1
+     * @param {*} array 
+     * @param {number} target 
+     * @returns {number} an index of a target. Otherwise returns -1
      */
-    static exponentialSearch(array, target){
+    static exponentialSearch (array, target) {
         if(array[0] == target)
             return 0;
 
@@ -145,15 +145,15 @@ class Search{
     /**
      * O(loglogN)
      * 
-     * @param array 
-     * @param number target 
-     * @param number startingIndex 
-     * @param number endingIndex 
-     * @returns an index of a target. Otherwise returns -1
+     * @param {*} array 
+     * @param {number}  target 
+     * @param {number}  startingIndex 
+     * @param {number}  endingIndex 
+     * @returns {number} an index of a target. Otherwise returns -1
      */
-    static interpolationSearch(array, target, startingIndex = 0, endingIndex = array.length - 1){
+    static interpolationSearch (array, target, startingIndex = 0, endingIndex = array.length - 1) {
         if(startingIndex <= endingIndex && array[endingIndex] >= target 
-            && array[startingIndex] <= target){
+            && array[startingIndex] <= target) {
                 
             let pos = startingIndex + 
                         Math.floor(((endingIndex - startingIndex) / 
@@ -174,11 +174,11 @@ class Search{
     /**
      * O(sqrt(n))
      * 
-     * @param array 
-     * @param number target 
-     * @returns an index of a target. Otherwise returns -1
+     * @param {*} array 
+     * @param {number}  target 
+     * @returns {number} an index of a target. Otherwise returns -1
      */
-    static jumpSearch(array, target){
+    static jumpSearch (array, target) {
         let size = array.length,
             step = Math.sqrt(size),
             prev = 0;
@@ -191,7 +191,7 @@ class Search{
                 return -1;
         }
 
-        while (array[prev] < target){
+        while (array[prev] < target) {
             prev++;
 
             if(prev === Math.min(step, size))
