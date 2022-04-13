@@ -186,7 +186,7 @@ class Select {
      * @param {number} k kth smallest element 
      * @returns the kth smallest element
      */
-    static countingSelect(array, k){
+    static countingSelect (array, k) {
         let max = Math.max.apply(Math, array),
             min = Math.min.apply(Math, array),
             range = max - min + 1,
