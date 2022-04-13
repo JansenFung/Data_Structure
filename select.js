@@ -1,6 +1,6 @@
 import Sorting from "./sorting.js"
 
-class Select{
+class Select {
     /**
      * Gerenates a random number
      * 
@@ -8,7 +8,7 @@ class Select{
      * @param {number} min 
      * @returns a random number between the given range
      */
-    static randomElement(max, min){
+    static randomElement (max, min) {
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
 
@@ -17,13 +17,14 @@ class Select{
      * @param {number} size 
      * @returns a array with random elements
      */
-    static randomArray(size){
-        if(size <= 0){
+    static randomArray (size) {
+        if (size <= 0) {
             return [];
         }
-        else{
+        else {
             const array = Select.randomArray(size - 1);
             array.push(Select.randomElement(20, -10));
+
             return array;
         }
     }
@@ -32,10 +33,10 @@ class Select{
      * Use destructing assignment ot swap 2 elements
      * 
      * @param {*} array 
-     * @param {number} a index
-     * @param {number} b index
+     * @param {number} a index of the first item
+     * @param {number} b index of the second item
      */
-    static #swap(array, a, b){
+    static #swap (array, a, b) {
         [array[a], array[b]] = [array[b], array[a]];
     }
 
@@ -46,8 +47,9 @@ class Select{
      * @param {number} k kth smallest element 
      * @returns the kth smallest element
      */
-    static nLogNSelect(array, k){
+    static nLogNSelect (array, k) {
         array = Sorting.mergeSort(array);
+        
         return array[k-1];
     }
 
@@ -59,7 +61,7 @@ class Select{
      * @param {number} k kth smallest element
      * @returns the kth smallest element
      */
-    static minHeapSelect(array, k){
+    static minHeapSelect (array, k) {
         Select.#buildMinHeap(array);
 
         for (let i = 0; i < k - 1; i++)
@@ -75,7 +77,7 @@ class Select{
      * @param {number} i starting index 
      * @param {number} max size of the max heap 
      */
-    static #minHeapify(array, i, max){
+    static #minHeapify (array, i, max) {
         let left = 2 * i + 1,
             right = 2 * i + 2,
             smallest = i;
@@ -86,7 +88,7 @@ class Select{
         if (right < max && array[right] < array[smallest])
             smallest = right;
 
-        if(smallest != i){
+        if (smallest != i) {
             Select.#swap(array, i, smallest);
             Select.#minHeapify(array, smallest, max);
         }
@@ -97,7 +99,7 @@ class Select{
      * 
      * @param {*} array 
      */
-    static #buildMinHeap(array){
+    static #buildMinHeap (array) {
         let i = Math.floor(array.length / 2) - 1;
 
         while (i >= 0)
@@ -109,7 +111,7 @@ class Select{
      * 
      * @param {*} array 
      */
-    static #extractMin(array){
+    static #extractMin (array) {
         let lastElement = array.length - 1;
 
         Select.#swap(array, 0, lastElement);
@@ -126,7 +128,7 @@ class Select{
      * @param {number} k kth smallest element 
      * @returns the kth smallest element
      */
-    static maxHeapSelect(array, k){
+    static maxHeapSelect (array, k) {
         Select.#buildMaxHeap(array, k);
 
         for (let i = k; i < array.length; i++) {
@@ -146,7 +148,7 @@ class Select{
      * @param {number} i starting index
      * @param {number} max size of the max heap
      */
-    static #maxHeapify(array, i, max){
+    static #maxHeapify (array, i, max) {
         let left = 2 * i + 1,
             right = 2 * i + 2,
             largest = i;
@@ -157,7 +159,7 @@ class Select{
         if (right < max && array[right] > array[largest])
             largest = right;
 
-        if(largest != i){
+        if (largest != i) {
             Select.#swap(array, i, largest);
             Select.#maxHeapify(array, largest, max);
         }
@@ -169,7 +171,7 @@ class Select{
      * @param {*} array 
      * @param {number} size 
      */
-    static #buildMaxHeap(array, size){
+    static #buildMaxHeap (array, size) {
         let i = Math.floor(size / 2) - 1;
 
         while (i >= 0)
