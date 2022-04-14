@@ -14,7 +14,7 @@ export default class Sorting {
      * Generate a random array
      * 
      * @param {number} n size of an array
-     * @returns a random array of size equals to n
+     * @returns {*} a random array of size equals to n
      */
      static randomArray (n) {
          if (n <= 0) {
@@ -42,7 +42,7 @@ export default class Sorting {
      * Stable
      * 
      * @param {*} array 
-     * @returns a sorted array 
+     * @returns {*} a sorted array 
      */
      static selectionSort (array) {
         for (let i = 0; i < array.length - 1; i++) {
@@ -64,7 +64,7 @@ export default class Sorting {
      * Stable
      * 
      * @param {*} array 
-     * @returns a sorted array 
+     * @returns {*} a sorted array 
      */
     static insertionSort (array) {
         for (let i = 1; i < array.length; i++) {
@@ -87,7 +87,7 @@ export default class Sorting {
      * Stable
      * 
      * @param {*} array 
-     * @returns a sorted array 
+     * @returns {*} a sorted array 
      */
     static bubbleSort (array) { 
         for (let i = 0; i < array.length; i++) {
@@ -112,7 +112,7 @@ export default class Sorting {
      * Stable
      * 
      * @param {*} array 
-     * @returns a sorted array 
+     * @returns {*} a sorted array 
      */
     static countingSort (array) {
         let max = Math.max.apply(Math, array),
@@ -144,7 +144,7 @@ export default class Sorting {
      * Stable
      * 
      * @param {*} array 
-     * @returns a sorted array
+     * @returns {*} a sorted array
      */
     static mergeSort (array) {
         if(array.length < 2)
@@ -162,7 +162,7 @@ export default class Sorting {
      * 
      * @param {*} arrA 1st array 
      * @param {*} arrB 2nd array
-     * @returns a sorted comnined array of 2 arrays
+     * @returns {*} a sorted comnined array of 2 arrays
      */
     static #merge (arrA, arrB) {
         let i = 0,
@@ -190,7 +190,7 @@ export default class Sorting {
      * Not stable
      * 
      * @param {*} array 
-     * @returns a sorted array 
+     * @returns {*} a sorted array 
      */
     static heapSort (array) {
         Sorting.#buildMaxHeap(array);
@@ -232,7 +232,7 @@ export default class Sorting {
      * Build a max heap
      * 
      * @param {*} array 
-     * @returns a max heap
+     * @returns {*} a max heap
      */
     static #buildMaxHeap (array) {
         let i = Math.floor(array.length / 2) - 1;
@@ -247,8 +247,8 @@ export default class Sorting {
      * Best case: O(nlogn)
      * Worst case: O(n^2) if always pick either smallest or largest element as a pivot
      * 
-     * @param array 
-     * @returns a sorted array 
+     * @param {*} array 
+     * @returns {*} a sorted array 
      */
     static notOptimizeQuickSort (array) {
         if (array.length < 2)
@@ -277,10 +277,10 @@ export default class Sorting {
      * O(nlogn)
      * Not stable
      * 
-     * @param array 
-     * @param number left starting index
-     * @param number right ending index 
-     * @returns 
+     * @param {*} array 
+     * @param {number} left starting index
+     * @param {number} right ending index 
+     * @returns {*} a sorted array 
      */
     static quickSort (array, left = 0, right = array.length - 1) {
         if (left >= right)
@@ -299,10 +299,10 @@ export default class Sorting {
     /**
      * Find a pivot by picking the leftmost, middle, and rightmost element and sort them
      * 
-     * @param array 
-     * @param number left leftmost index
-     * @param number right rightmost index 
-     * @returns Index of a pivot
+     * @param {*} array 
+     * @param {number} left leftmost index
+     * @param {number} right rightmost index 
+     * @returns {number} Index of a pivot
      */
     static #findPivot (array, left, right) {
         let middle = Math.floor((left + right) / 2);
@@ -323,10 +323,10 @@ export default class Sorting {
      * Partiton around the pivot, all elements less than pivot are on the left side of the pivot
      * all element are larger than pivot are on the right side of the pivot
      * 
-     * @param array 
-     * @param number left starting index 
-     * @param number right starting index
-     * @returns a partiton array
+     * @param {*} array 
+     * @param {number} left starting index 
+     * @param {number} right starting index
+     * @returns {*} a partiton array
      */
     static #partition (array, left, right) {
         let pivot = Sorting.#findPivot(array, left, right),
