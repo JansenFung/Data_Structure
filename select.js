@@ -184,7 +184,7 @@ class Select {
      * 
      * @param {*} array 
      * @param {number} k kth smallest element 
-     * @returns the kth smallest element
+     * @returns {number} the kth smallest element
      */
     static countingSelect (array, k) {
         let max = Math.max.apply(Math, array),
@@ -214,9 +214,9 @@ class Select {
      * @param {number} k kth smallest element
      * @param {number} left starting index
      * @param {number} right ending index
-     * @returns the kth smallest element
+     * @returns {number} the kth smallest element
      */
-    static quickSelect(array, k, left = 0, right = array.length - 1){
+    static quickSelect (array, k, left = 0, right = array.length - 1) {
         let pivot = Select.#partition(array, left, right);
 
         if (k - 1 == pivot)
@@ -233,9 +233,9 @@ class Select {
      * @param {*} array 
      * @param {number} left starting index
      * @param {number} right ending index
-     * @returns a partition array
+     * @returns {*} a partition array
      */
-    static #partition(array, left, right){
+    static #partition (array, left, right) {
         let pivotValue = array[right],
             pivotLoc = left;
 
@@ -261,10 +261,10 @@ class Select {
      * @param {number} k 
      * @param {number} left starting index
      * @param {number} right ending index
-     * @returns the kth smallest element
+     * @returns {number} the kth smallest element
      */
-    static kthSmallest(array, k, left = 0, right = array.length - 1){
-        if (k >= 0 && k <= right - left + 1){
+    static kthSmallest (array, k, left = 0, right = array.length - 1) {
+        if (k >= 0 && k <= right - left + 1) {
             let n = right - left + 1,
                 medians = new Array(Math.floor((n + 4) / 5));             
 
@@ -291,7 +291,7 @@ class Select {
      * Find the median of the array
      * 
      * @param {*} array 
-     * @returns the median
+     * @returns {number} the median
      */
     static #findMedian(array){
         array.sort((a,b) => a - b);
@@ -300,13 +300,13 @@ class Select {
     }
 
     /**
-     * Partition an array
+     * Partition an array, pick a median as pivot
      * 
      * @param {*} array 
      * @param {number} med 
      * @param {number} left staring index
      * @param {number} right ending index
-     * @returns a partition array
+     * @returns {*} a partition array
      */
     static #kthSmallestPartition(array, med, left, right){
         let pivotLoc = left;
@@ -327,7 +327,3 @@ class Select {
         return pivotLoc;
     }
 }
-
-const x = Select.randomArray(15);
-
-console.log(Select.kthSmallest([...x], 6), Sorting.insertionSort([...x]))
